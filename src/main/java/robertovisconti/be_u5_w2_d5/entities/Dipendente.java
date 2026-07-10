@@ -37,7 +37,15 @@ public class Dipendente {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.imgProfile = imgProfile;
+        this.imgProfile = "https://ui-avatars.com/api/?name=" + username;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
     public void setUsername(String username) {
@@ -51,4 +59,6 @@ public class Dipendente {
     public void setImgProfile(String imgProfile) {
         this.imgProfile = imgProfile;
     }
+
+
 }
