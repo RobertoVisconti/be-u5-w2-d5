@@ -37,7 +37,7 @@ public class Dipendente {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.imgProfile = "https://ui-avatars.com/api/?name=" + username;
+        this.imgProfile = imgProfile;
     }
 
     public void setNome(String nome) {
@@ -50,6 +50,9 @@ public class Dipendente {
 
     public void setUsername(String username) {
         this.username = username;
+        if (this.imgProfile == null) {
+            this.imgProfile = "https://ui-avatars.com/api/?name=" + username;
+        }
     }
 
     public void setEmail(String email) {

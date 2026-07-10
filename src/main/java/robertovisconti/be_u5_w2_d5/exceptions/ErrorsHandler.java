@@ -21,7 +21,7 @@ public class ErrorsHandler {
         payload.put("errors", ex.getListaErrori());
         payload.put("timestamp", LocalDateTime.now());
         payload.put("status", HttpStatus.BAD_REQUEST.value());
-
+        ex.printStackTrace();
         return payload;
     }
 
@@ -33,6 +33,7 @@ public class ErrorsHandler {
         payload.put("message", ex.getMessage());
         payload.put("timestamp", LocalDateTime.now());
         payload.put("status", HttpStatus.BAD_REQUEST.value());
+        ex.printStackTrace();
         return payload;
     }
 
@@ -43,6 +44,7 @@ public class ErrorsHandler {
         payload.put("message", ex.getMessage());
         payload.put("timestamp", LocalDateTime.now());
         payload.put("status", HttpStatus.NOT_FOUND.value());
+        ex.printStackTrace();
         return payload;
     }
 
@@ -53,6 +55,7 @@ public class ErrorsHandler {
         payload.put("message", "Errore interno del server: " + ex.getMessage());
         payload.put("timestamp", LocalDateTime.now());
         payload.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        ex.printStackTrace();
         return payload;
     }
 

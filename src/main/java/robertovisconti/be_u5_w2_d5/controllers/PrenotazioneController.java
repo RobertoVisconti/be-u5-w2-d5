@@ -57,5 +57,21 @@ public class PrenotazioneController {
         return prenotazioneService.findById(id);
     }
 
+    // PUT
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Prenotazione modificaPrenotazione(
+            @PathVariable UUID id,
+            @RequestBody @Validated PrenotazioneDTO body, BindingResult validation
+    ) {
+        if (validation.hasErrors()) {
+            List<String> listaErrori = validation.getFieldErrors().stream()
+                    .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+                    .toList();
+            throw new ValidationExceptions(listaErrori);
+        }
+        return prenotazioneService.updatePrenotazione(id, body);
+    }
+
 
 }

@@ -12,6 +12,7 @@ import robertovisconti.be_u5_w2_d5.exceptions.BadRequestException;
 import robertovisconti.be_u5_w2_d5.exceptions.NotFoundException;
 import robertovisconti.be_u5_w2_d5.repositories.ViaggioRepository;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
@@ -28,6 +29,11 @@ public class ViaggioService {
         // controllo se il viaggio esiste già
         if (viaggioRepository.existsByDestinazioneAndData(body.destinazione(), body.data())) {
             throw new BadRequestException("Esiste già un viaggio pianificato per " + body.destinazione() + " in data: " + body.data());
+        }
+
+        // controllo creazione e viaggio futuro su stato
+        if (body.statoViaggio() == StatoViaggio.COMPLETATO && body.data().isAfter(LocalDate.now())) {
+            throw new BadRequestException("Non puoi creare un viaggio COMPLETATO se la data di partenza (" + body.data() + ") è nel futuro");
         }
 
         Viaggio nuovoViaggio = new Viaggio();
@@ -59,6 +65,12 @@ public class ViaggioService {
         if (found.getStatoViaggio() == StatoViaggio.COMPLETATO) {
             throw new BadRequestException("Non puoi modificare un viaggio che è già in stato di: " + body.statoViaggio());
         }
+
+        // controllo sullo stato nel futuro
+        if (body.statoViaggio() == StatoViaggio.COMPLETATO && body.data().isAfter(LocalDate.now())) {
+            throw new BadRequestException("Non puoi impostare un viaggio COMPLETATO se la data di partenza (" + body.data() + ") è nel futuro");
+        }
+
         found.setDestinazione(body.destinazione());
         found.setData(body.data());
         found.setStatoViaggio(body.statoViaggio());
@@ -69,6 +81,18 @@ public class ViaggioService {
     // UPDATE STATO
     public Viaggio updateStato(UUID id, StatoViaggio nuovoStato) {
         Viaggio found = this.findById(id);
+
+        // controllo se lo stato è completato non può essere modificato
+        if (found.getStatoViaggio() == StatoViaggio.COMPLETATO) {
+            throw new BadRequestException("Non puoi cambiare lo stato di un viaggio che è già: " + found.getStatoViaggio());
+        }
+
+        // controlla la data sulla variazione stato
+        if (nuovoStato == StatoViaggio.COMPLETATO && found.getData().isAfter(LocalDate.now())) {
+            throw new BadRequestException("Non puoi impostare questo viaggio come COMPLETATO perché la sua data (" + found.getData() + ") è nel futuro");
+        }
+
+        // controllo se lo stato immesso è identico a quello che è impostato
         if (found.getStatoViaggio() == nuovoStato) {
             throw new BadRequestException("Il viaggio con ID: " + id + " è già nello stato di: " + nuovoStato);
         }

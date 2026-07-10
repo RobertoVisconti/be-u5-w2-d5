@@ -34,7 +34,7 @@ public class DipendenteController {
     ) {
         if (validation.hasErrors()) {
             List<String> listaErrori = validation.getFieldErrors().stream()
-                    .map(fieldError -> fieldError.getDefaultMessage())
+                    .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
                     .toList();
             throw new ValidationExceptions(listaErrori);
         }
@@ -69,7 +69,7 @@ public class DipendenteController {
     ) {
         if (validation.hasErrors()) {
             List<String> listaErrori = validation.getFieldErrors().stream()
-                    .map(fieldError -> fieldError.getDefaultMessage())
+                    .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
                     .toList();
             throw new ValidationExceptions(listaErrori);
         }
