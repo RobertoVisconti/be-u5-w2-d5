@@ -1,5 +1,9 @@
 package robertovisconti.be_u5_w2_d5.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import robertovisconti.be_u5_w2_d5.DTO.PrenotazioneDTO;
 import robertovisconti.be_u5_w2_d5.entities.Dipendente;
@@ -10,6 +14,8 @@ import robertovisconti.be_u5_w2_d5.exceptions.NotFoundException;
 import robertovisconti.be_u5_w2_d5.repositories.DipendenteRepository;
 import robertovisconti.be_u5_w2_d5.repositories.PrenotazioneRepository;
 import robertovisconti.be_u5_w2_d5.repositories.ViaggioRepository;
+
+import java.util.UUID;
 
 @Service
 public class PrenotazioneService {
@@ -46,5 +52,18 @@ public class PrenotazioneService {
 
         return prenotazioneRepository.save(nuovaPrenotazione);
 
+    }
+
+    // FIND BY ID
+    public Prenotazione findById(UUID id) {
+        return prenotazioneRepository.findById(id).orElseThrow(() -> new NotFoundException("Prenotazione non trovata con ID: " + id));
+    }
+
+
+    // FIND BY ID AND RETURN LIST
+    public Page<Prenotazione> findAll(int page, int size, String sortBy) {
+        if (size > 15) size = 15;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return prenotazioneRepository.findAll(pageable);
     }
 }
