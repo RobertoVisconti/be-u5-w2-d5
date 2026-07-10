@@ -34,15 +34,15 @@ public class PrenotazioneService {
     public Prenotazione save(PrenotazioneDTO body) {
 
         // verifico se il dipendente esiste
-        Dipendente dipendente = dipendenteRepository.findById(body.idDipendente()).orElseThrow(() -> new NotFoundException("Viaggio non trovato con ID: " + body.idDipendente()));
+        Dipendente dipendente = dipendenteRepository.findById(body.idDipendente()).orElseThrow(() -> new NotFoundException("Dipendente non trovato con ID: " + body.idDipendente()));
 
         // verifico che il viaggio esiste
-        Viaggio viaggio = viaggioRepository.findById(body.idDipendente()).orElseThrow(() -> new NotFoundException("Viaggio non trovato con ID: " + body.idViaggio()));
+        Viaggio viaggio = viaggioRepository.findById(body.idViaggio()).orElseThrow(() -> new NotFoundException("Viaggio non trovato con ID: " + body.idViaggio()));
 
         // controllo sulla prenotazione
         boolean giaPrenotato = prenotazioneRepository.existsByDipendenteAndViaggioData(dipendente, viaggio.getData());
         if (giaPrenotato) {
-            throw new BadRequestException("Il dipendete ha già una prenotazione per il giorno " + viaggio.getData());
+            throw new BadRequestException("Il dipendete con username: " + dipendente.getUsername() + " ha già una prenotazione per il giorno " + viaggio.getData());
         }
 
         Prenotazione nuovaPrenotazione = new Prenotazione();

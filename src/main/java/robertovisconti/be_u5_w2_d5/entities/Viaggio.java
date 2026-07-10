@@ -34,6 +34,14 @@ public class Viaggio {
         this.statoViaggio = statoViaggio;
     }
 
+    public void setDestinazione(String destinazione) {
+        this.destinazione = destinazione;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
     public void setStatoViaggio(StatoViaggio statoViaggio) {
         this.statoViaggio = statoViaggio;
     }

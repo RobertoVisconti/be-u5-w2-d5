@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione, UUID> {
 
     boolean existsByDipendenteAndViaggioData(Dipendente dipendente, LocalDate dataViaggio);
+    
 }

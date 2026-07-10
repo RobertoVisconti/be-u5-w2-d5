@@ -15,7 +15,7 @@ public record ViaggioDTO(
         @FutureOrPresent(message = "La data del viaggio non può essere nel passato")
         LocalDate data,
 
-        @NotBlank(message = "Lo stato del viaggio è obbligatorio")
+        @NotNull(message = "Lo stato del viaggio è obbligatorio")
         StatoViaggio statoViaggio
 ) {
 }
