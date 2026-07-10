@@ -4,6 +4,7 @@ package robertovisconti.be_u5_w2_d5.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Table(name = "prenotazione")
 @Getter
 @NoArgsConstructor
+@ToString
 public class Prenotazione {
 
     @Id

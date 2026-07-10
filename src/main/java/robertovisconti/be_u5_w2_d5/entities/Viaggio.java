@@ -3,6 +3,7 @@ package robertovisconti.be_u5_w2_d5.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import robertovisconti.be_u5_w2_d5.enums.StatoViaggio;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Table(name = "viaggio")
 @Getter
 @NoArgsConstructor
+@ToString
 public class Viaggio {
 
     @Id
