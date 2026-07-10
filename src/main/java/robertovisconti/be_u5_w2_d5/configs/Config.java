@@ -15,9 +15,6 @@ public class Config {
                                             @Value("${cloudinary.key}") String apiKey,
                                             @Value("${cloudinary.secret}") String secret) {
 
-        System.out.println("IL MIO CLOUD NAME E': " + cloudName);
-
-        
         Map<String, String> config = new HashMap<>();
         config.put("cloud_name", cloudName);
         config.put("api_key", apiKey);
