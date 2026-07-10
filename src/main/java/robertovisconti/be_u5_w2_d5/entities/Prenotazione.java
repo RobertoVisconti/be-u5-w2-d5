@@ -22,7 +22,7 @@ public class Prenotazione {
     @Column(name = "data_richiesta", nullable = false)
     private LocalDate dataRichiesta = LocalDate.now();
 
-    @Column(nullable = false)
+
     private String note;
 
     @ManyToOne
@@ -35,6 +35,18 @@ public class Prenotazione {
 
     public Prenotazione(LocalDate dataRichiesta, String note) {
         this.dataRichiesta = dataRichiesta;
+        this.note = note;
+    }
+
+    public void setViaggio(Viaggio viaggio) {
+        this.viaggio = viaggio;
+    }
+
+    public void setDipendente(Dipendente dipendente) {
+        this.dipendente = dipendente;
+    }
+
+    public void setNote(String note) {
         this.note = note;
     }
 }
