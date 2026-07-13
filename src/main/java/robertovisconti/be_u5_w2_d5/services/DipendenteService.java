@@ -97,8 +97,13 @@ public class DipendenteService {
             }
 
         }
-        
+
         return dipendenteRepository.save(found);
 
     }
+
+    public Dipendente findByEmail(String email) {
+        return this.dipendenteRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("L'utente con e-mail: " + email + " non è stato trovato"));
+    }
+    
 }

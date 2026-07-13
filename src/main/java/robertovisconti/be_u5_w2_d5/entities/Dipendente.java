@@ -31,6 +31,9 @@ public class Dipendente {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     @Column(name = "img_profile")
     private String imgProfile;
 
