@@ -42,6 +42,7 @@ public class DipendenteService {
         nuovo.setNome(body.nome());
         nuovo.setCognome(body.cognome());
         nuovo.setEmail(body.email());
+        nuovo.setPassword(body.password());
 
         nuovo.setUsername(body.username());
 
@@ -105,5 +106,5 @@ public class DipendenteService {
     public Dipendente findByEmail(String email) {
         return this.dipendenteRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("L'utente con e-mail: " + email + " non è stato trovato"));
     }
-    
+
 }

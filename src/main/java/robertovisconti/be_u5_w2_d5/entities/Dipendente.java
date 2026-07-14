@@ -60,6 +60,10 @@ public class Dipendente {
         }
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
