@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import robertovisconti.be_u5_w2_d5.DTO.ErrorsDTO;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -35,6 +36,12 @@ public class ErrorsHandler {
         payload.put("status", HttpStatus.BAD_REQUEST.value());
         ex.printStackTrace();
         return payload;
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorsDTO handleUnauthorized(UnauthorizedException ex) {
+        return new ErrorsDTO(ex.getMessage(), LocalDateTime.now());
     }
 
     @ExceptionHandler(NotFoundException.class)
